@@ -127,9 +127,9 @@ public class MyBot : IChessBot
         if (board.IsInCheckmate())
             return -10_000_000 - depth;
 
-        // Draw
+        // Penalty for drawing, go big or go home!
         if (board.IsDraw())
-            return 0;
+            return turn == board.IsWhiteToMove ? -150 : 150;
 
         // Gets all legal moves in current position (captures only for quiescense search at end of regular search depth)
         Span<Move> allMoves = stackalloc Move[256];
